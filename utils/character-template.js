@@ -50,18 +50,35 @@ const displayImage = () => {
 }
 
 //Displays the character's max and current HP to the page
-const displayHP = () => {
-    
+const displayHP = (character) => {
+    let {maxHP, currentHP} = character;
+    return `
+    <div class="p-3">
+        <span>HP: </span><span>${currentHP}</span><span>/</span><span>${maxHP}</span>
+    </div>
+    `
 }
 
 //Displays the character's AC to the page
-const displayAC = () => {
-    
+const displayAC = (character) => {
+    return `
+    <div class="p-3">
+        <span>Armor Class: </span><span>${character.ac}</span>
+    </div>
+    `
 }
 
 //Displays the character's skills to the page
-const displaySkills = () => {
+const displaySkills = (skillsArray) => {
+    return skillsArray.map(function({name, Proficient}) {
 
+        return `
+        <div class="d-flex text-center justify-content-between p-2 w-100">
+            <p class="w-50">${name}</p>
+            <p class="w-50">${Proficient}</p>
+        </div>
+        `
+    }).join("")
 }
 
 //Displays the character's equipment to the page
@@ -109,95 +126,15 @@ const loadPage = (character) => {
             </div>            
         </div>
         <div id="secondary-content-div" class="col-12 d-flex justify-content-around align-items-center bg-primary">
-            <div class="p-3">
-            <span>HP: </span><span>14</span><span>/</span><span>14</span>
-            </div>
-            <div class="p-3">
-            <span>Armor Class: </span><span>14</span>
-            </div>
+            ${displayHP(character)}
+            ${displayAC(character)}
         </div>
         <div id="skills-section-div" class="d-flex flex-column col-12 align-items-between">
             <div id="skills-header-div" class="d-flex text-center bg-secondary text-white justify-content-between align-items-between p-2 w-100">
                 <p class="w-50">Skill</p>
                 <p class="w-50">Proficient</p>
             </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Acrobatics</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Animal Handling</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Arcana</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Athletics</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Skill</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Deception</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">History</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Insight</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Intimidation</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Investigation</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Medicine</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Nature</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Perception</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Performance</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Persuasion</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Religion</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Sleight of Hand</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Stealth</p>
-                <p class="w-50">Proficient</p>
-            </div>
-            <div class="d-flex text-center justify-content-between p-2 w-100">
-                <p class="w-50">Survival</p>
-                <p class="w-50">Proficient</p>
-            </div>
-
+            ${displaySkills(character.skills)}
         </div>
         <div class="bg-secondary text-light w-100 text-center">
             <h3>Equipment</h3>
