@@ -18,7 +18,10 @@ const {
 
 let character = new Character();
 //Assign any values we want to the new character
-character.name = "Bilbo Baggins";
+character.name = "Durin";
+character.race = "Dwarf";
+character.level = 5;
+character.xp = 327;
 
 logCharacter(character);
 

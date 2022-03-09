@@ -4,15 +4,33 @@ class Character {
         this.name = "Default";
         this.level = 1;
         this.race = "Human";
-        this.class = "Fighter";
-        this.attributes = {
-            strength: 10,
-            intelligence: 10,
-            wisdom: 10,
-            dexterity: 10,
-            constitution: 10,
-            charisma: 10
-        };
+        this.characterClass = "Fighter";
+        this.attributes = [
+            {
+                name: "Strength",
+                score: 10
+            },
+            {
+                name: "Intelligence",
+                score: 10
+            },
+            {
+                name: "Wisdom",
+                score: 10
+            },
+            {
+                name: "Dexterity",
+                score: 10
+            },
+            {
+                name: "Constitution",
+                score: 10
+            },
+            {
+                name: "Charisma",
+                score: 10
+            }
+        ];
         this.bonuses = [0, 0, 0, 0, 0, 0];
         this.move = 30;
         this.hitDice = 8;
@@ -20,6 +38,7 @@ class Character {
         this.currentHP = this.maxHP;
         this.ac = 10;
         this.xp = 0;
+        this.nextLevelXP = 400;
         this.skills = [
             {
                 name: "Acrobatics",

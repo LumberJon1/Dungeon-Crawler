@@ -10,18 +10,38 @@ const displayName = (character) => {
 }
 
 //Displays the character's level, race, and class to the page
-const displayClass = () => {
-
+const displayClass = (character) => {
+    let {level, race, characterClass} = character;
+    return `
+    <h3 class="bg-primary text-center col-sm-4">Level: ${level}</h3>
+    <h3 class="bg-primary text-center col-sm-4">Race: ${race}</h3>
+    <h3 class="bg-primary text-center col-sm-4">Class: ${characterClass}</h3>
+    `;
 }
 
 //Displays the character's XP and level progress to the page
-const displayXP = () => {
-
+const displayXP = (character) => {
+    let {xp, level, nextLevelXP} = character;
+    return `
+    <div id="xp-section-div" class="col-12 mb-2 d-flex align-items-center justify-content-between py-1 px-4 bg-secondary text-light">
+        <h3>XP: ${xp} / ${nextLevelXP}</h3>
+        <h3>Progress to level ${level + 1}: ${(xp / nextLevelXP) * 100}%</h3>
+    </div>
+    `;
 }
 
 //Displays the character's attribute scores and bonuses to the page
-const displayAttributes = () => {
-
+const displayAttributes = (attributesArray) => {
+    return `
+    ${attributesArray.map(function({name, score}) {
+        return `
+        <div class="d-flex align-items-center justify-content-center p-2 w-100 h-100">
+            <h4>${name}: ${score}</h4>
+        </div>
+        <p>bonus</p>
+        `
+    }).join("")
+    }`
 }
 
 //Displays the character image to the page
@@ -73,43 +93,14 @@ const loadPage = (character) => {
     </header>
     <main class="row">
         <div id="description-div" class="d-flex flex-column flex-sm-row align-items-center justify-content-center col-12">
-            <h3 class="bg-primary text-center col-sm-4">Level:</h3>
-            <h3 class="bg-primary text-center col-sm-4">Race:</h3>
-            <h3 class="bg-primary text-center col-sm-4">Class:</h3>
+            ${displayClass(character)}
         </div>
-        <div id="xp-section-div" class="col-12 mb-2 d-flex align-items-center justify-content-between py-1 px-4 bg-secondary text-light">
-            <h3>XP: 0 / 400</h3>
-            <h3>Progress to level 2: 0%</h3>
-        </div>
-
+        ${displayXP(character)}
         <div id="main-content-div" class="d-flex col-12 flex-column align-items-center justify-content-center">
             <div class="border border-secondary d-flex flex-column-reverse flex-md-row col-12">
                 <div id="attributes-div" class="d-flex col-md-6 flex-column align-items-center justify-content-center m-3 m-md-0">
                     <h3>Attributes</h3>
-                    <div class="d-flex align-items-center justify-content-center p-2 w-100 h-100">
-                        <h4>Strength: 10</h4>
-                    </div>
-                    <p>bonus</p>
-                    <div class="d-flex align-items-center justify-content-center p-2">
-                        <h4>Intelligence: 10</h4>
-                    </div>
-                    <p>bonus</p>
-                    <div class="d-flex align-items-center justify-content-center p-2">
-                        <h4>Wisdom: 10</h4>
-                    </div>
-                    <p>bonus</p>
-                    <div class="d-flex align-items-center justify-content-center p-2">
-                        <h4>Dexterity: 10</h4>
-                    </div>
-                    <p>bonus</p>
-                    <div class="d-flex align-items-center justify-content-center p-2">
-                        <h4>Constitution: 10</h4>
-                    </div>
-                    <p>bonus</p>
-                    <div class="d-flex align-items-center justify-content-center p-2">
-                        <h4>Charisma: 10</h4>
-                    </div>
-                    <p>bonus</p>
+                    ${displayAttributes(character.attributes)}
                 </div>
 
                 <div id="image-div" class="d-flex col-md-6 flex-column align-items-center justify-content-center">
