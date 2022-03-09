@@ -1,8 +1,7 @@
-const rollDice = require("./dice.js");
 
 class Character {
-    constructor(name="Default") {
-        this.name = name;
+    constructor() {
+        this.name = "Default";
         this.level = 1;
         this.race = "Human";
         this.class = "Fighter";
@@ -126,5 +125,4 @@ class Character {
     }
 }
 
-
-rollDice(10, 10);
+module.exports = Character;
