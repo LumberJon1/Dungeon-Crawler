@@ -142,6 +142,43 @@ class Character {
             copper: 0
         }
     }
+
+    //Methods
+    getBonus(score) {
+        if (score === 1) {
+            return -5;
+        }
+        else if (score < 4) {
+            return -4;
+        }
+        else if (score < 6) {
+            return -3;
+        }
+        else if (score < 8) {
+            return -2;
+        }
+        else if (score < 10) {
+            return -1;
+        }
+        else if (score < 12) {
+            return 0;
+        }
+        else if (score < 14) {
+            return 1;
+        }
+        else if (score < 16) {
+            return 2;
+        }
+        else if (score < 18) {
+            return 3;
+        }
+        else if (score < 20) {
+            return 4;
+        }
+        else {
+            return 5;
+        }
+    }
 }
 
 module.exports = Character;

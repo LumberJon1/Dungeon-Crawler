@@ -31,14 +31,14 @@ const displayXP = (character) => {
 }
 
 //Displays the character's attribute scores and bonuses to the page
-const displayAttributes = (attributesArray) => {
+const displayAttributes = (character, attributesArray) => {
     return `
     ${attributesArray.map(function({name, score}) {
         return `
         <div class="d-flex align-items-center justify-content-center p-2 w-100 h-100">
             <h4>${name}: ${score}</h4>
         </div>
-        <p>bonus</p>
+        <p>Bonus: ${character.getBonus(score)}</p>
         `
     }).join("")
     }`
@@ -100,7 +100,7 @@ const loadPage = (character) => {
             <div class="border border-secondary d-flex flex-column-reverse flex-md-row col-12">
                 <div id="attributes-div" class="d-flex col-md-6 flex-column align-items-center justify-content-center m-3 m-md-0">
                     <h3>Attributes</h3>
-                    ${displayAttributes(character.attributes)}
+                    ${displayAttributes(character, character.attributes)}
                 </div>
 
                 <div id="image-div" class="d-flex col-md-6 flex-column align-items-center justify-content-center">
