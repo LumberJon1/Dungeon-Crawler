@@ -55,10 +55,11 @@ app.get("/api/characters", (req, res) => {
             throw err;
         }
         if (data) {
-            charactersArray = JSON.parse(data);       
+            charactersArray.push(JSON.parse(data));
+            console.log("Parsed "+data);      
+            res.json(charactersArray);
         }
     });
-    res.json(charactersArray);
 });
 
 //POST routes

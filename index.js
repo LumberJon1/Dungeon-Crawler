@@ -24,6 +24,8 @@ character.level = 5;
 character.xp = 327;
 character.attributes[0].score = 16;
 
+console.log(character);
+
 logCharacter(character);
 
 
