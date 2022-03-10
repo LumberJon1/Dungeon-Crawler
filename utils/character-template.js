@@ -13,9 +13,9 @@ const displayName = (character) => {
 const displayClass = (character) => {
     let {level, race, characterClass} = character;
     return `
-    <h3 class="bg-primary text-center col-sm-4">Level: ${level}</h3>
-    <h3 class="bg-primary text-center col-sm-4">Race: ${race}</h3>
-    <h3 class="bg-primary text-center col-sm-4">Class: ${characterClass}</h3>
+    <h3 id="characterLevel" class="bg-primary text-center col-sm-4">Level: ${level}</h3>
+    <h3 id="characterRace" class="bg-primary text-center col-sm-4">Race: ${race}</h3>
+    <h3 id="characterClass" class="bg-primary text-center col-sm-4">Class: ${characterClass}</h3>
     `;
 }
 
@@ -24,7 +24,7 @@ const displayXP = (character) => {
     let {xp, level, nextLevelXP} = character;
     return `
     <div id="xp-section-div" class="col-12 mb-2 d-flex align-items-center justify-content-between py-1 px-4 bg-secondary text-light">
-        <h3>XP: ${xp} / ${nextLevelXP}</h3>
+        <h3 id="characterXP">XP: ${xp} / ${nextLevelXP}</h3>
         <h3>Progress to level ${level + 1}: ${(xp / nextLevelXP) * 100}%</h3>
     </div>
     `;
@@ -36,9 +36,9 @@ const displayAttributes = (character, attributesArray) => {
     ${attributesArray.map(function({name, score}) {
         return `
         <div class="d-flex align-items-center justify-content-center p-2 w-100 h-100">
-            <h4>${name}: ${score}</h4>
+            <h4 class="characterAttribute">${name}: ${score}</h4>
         </div>
-        <p>Bonus: ${character.getBonus(score)}</p>
+        <p class="characterAttributeBonus">Bonus: ${character.getBonus(score)}</p>
         `
     }).join("")
     }`
@@ -54,7 +54,7 @@ const displayHP = (character) => {
     let {maxHP, currentHP} = character;
     return `
     <div class="p-3">
-        <span>HP: </span><span>${currentHP}</span><span>/</span><span>${maxHP}</span>
+        <span>HP: </span><span id="characterHPCurrent">${currentHP}</span><span>/</span><span id="characterHPMax">${maxHP}</span>
     </div>
     `
 }
@@ -63,7 +63,7 @@ const displayHP = (character) => {
 const displayAC = (character) => {
     return `
     <div class="p-3">
-        <span>Armor Class: </span><span>${character.ac}</span>
+        <span>Armor Class: </span><span id="characterAC">${character.ac}</span>
     </div>
     `
 }
@@ -74,8 +74,8 @@ const displaySkills = (skillsArray) => {
 
         return `
         <div class="d-flex text-center justify-content-between p-2 w-100">
-            <p class="w-50">${name}</p>
-            <p class="w-50">${Proficient}</p>
+            <p class="w-50 characterSkill">${name}</p>
+            <p class="w-50 characterSkillProficiency">${Proficient}</p>
         </div>
         `
     }).join("")
@@ -105,8 +105,12 @@ const loadPage = (character) => {
 </head>
 <body class="container-fluid">
     <header class="row">
+        <div id="editing-div" class="d-flex justify-content-center align-items-center col-12">
+            <p>Editing character sheet.  Select "Done" when finished.</p>
+            <button id="doneButton" class="btn btn-success text-light">Done</button>
+        </div>
         <h1 class="col-12 text-center p-2 bg-primary">Character Sheet</h1>
-        <h2 class="col-12 p-2 text-center bg-light">${displayName(character)}</h2>
+        <h2 id="characterName" class="col-12 p-2 text-center bg-light">${displayName(character)}</h2>
     </header>
     <main class="row">
         <div id="description-div" class="d-flex flex-column flex-sm-row align-items-center justify-content-center col-12">
@@ -175,6 +179,7 @@ const loadPage = (character) => {
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="./assets/js/script.js"></script>
 </body>
 </html>
     `

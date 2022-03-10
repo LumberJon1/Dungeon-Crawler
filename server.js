@@ -1,5 +1,6 @@
 const express = require("express");
 const fs = require("fs");
+const cors = require("cors");
 const path = require("path");
 
 const PORT = process.env.PORT || 3001;
@@ -13,6 +14,9 @@ app.use(express.json());
 
 //Make routes available for the static public pages
 app.use(express.static("public"));
+
+//Allow cors
+app.use(cors());
 
 
 //HTML routes...
@@ -76,18 +80,17 @@ app.post("/api/characters", (req, res) => {
             let charactersArray = JSON.parse(data);
             
             charactersArray.push(character);
+            fs.writeFileSync(path.join(__dirname, "/db/characters.json"), JSON.stringify(charactersArray, null, 4), (err) => {
+                if (err) {
+                    throw err;
+                }
+            });
+            
         }
-    
-    fs.writeFileSync(path.join(__dirname, "/db/characters.json"), JSON.stringify(charactersArray, null, 4), (err) => {
-        if (err) {
-            throw err;
-        }
-        console.log("Successfully wrote character to db");
     });
-
+    console.log("Successfully wrote character to db");
     res.send("Successfully wrote character to db");
-
-    });
+    
 });
 
 //Catch-all Route
