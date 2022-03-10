@@ -252,7 +252,7 @@ finishEdits = () => {
 
     //Assign the attributes to the elements of the page
     character.name = charName.innerText;
-    character.level = 1;
+    character.level = 12;
     character.race = charRace.innerText;
     character.characterClass = charClass.innerText;
 
@@ -267,10 +267,27 @@ finishEdits = () => {
       })
       .then(response => {
             if (response.ok) {
-              return response.json();
+                return response.json();
             }
             alert("Error "+response.statusText);
-          });
+
+        })
+        .then(
+            finalizeCharacter()
+        );
+};
+
+//Function that finalizes the character sheet with a fetch GET request from characters.json
+//And removes edit div/editable HTML elements, replacing them with static ones
+finalizeCharacter = () => {
+    console.log("Finalizing character sheet...");
+
+    fetch("/api/characters").then((response) => {
+        response.json().then(array => {
+            let selected = array[0].length - 1;
+            console.log(array[0][selected]);
+        });
+    })
 }
 
 

@@ -59,8 +59,7 @@ app.get("/api/characters", (req, res) => {
             throw err;
         }
         if (data) {
-            charactersArray.push(JSON.parse(data));
-            console.log("Parsed "+data);      
+            charactersArray.push(JSON.parse(data));     
             res.json(charactersArray);
         }
     });
