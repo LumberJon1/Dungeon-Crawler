@@ -13,13 +13,13 @@ const displayName = (character) => {
 const displayClass = (character) => {
     let {level, race, characterClass} = character;
     return `
-    <div id="characterLevelDiv" class="bg-primary text-center col-sm-4">
+    <div id="characterLevelDiv" class="bg-primary text-center col-sm-4 py-2">
         <h3 id="characterLevel">Level: ${level}</h3>
     </div>
-    <div id="characterRaceDiv" class="bg-primary text-center col-sm-4">
+    <div id="characterRaceDiv" class="bg-primary text-center col-sm-4 py-2">
         <h3 id="characterRace">Race: ${race}</h3>
     </div>
-    <div id="characterClassDiv" class="bg-primary text-center col-sm-4">
+    <div id="characterClassDiv" class="bg-primary text-center col-sm-4 py-2">
         <h3 id="characterClass">Class: ${characterClass}</h3>
     </div>
     `;

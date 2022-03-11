@@ -210,6 +210,120 @@ class Character {
     }
 }
 
+//Function that rolls dice
+rollDice = (number, type, bonus=0) => {
+    let results = [];
+    for (let i = 0; i < number; i++) {
+        let roll = Math.floor(Math.random() * type) + 1 + bonus;
+        console.log("Rolled a "+roll);
+        results.push(roll);
+    }
+    console.log(results);
+    return results;
+};
+
+//Array of possible choices for selections such as race and class
+const races = [
+    {
+        name: "Dwarf",
+        move: 25,
+        darkvision: 60
+    },
+    {
+        name: "Dragonborn",
+        move: 30,
+        darkvision: 0
+    },
+    {
+        name: "Elf",
+        move: 30,
+        darkvision: 60
+    },
+    {
+        name: "Gnome",
+        move: 25,
+        darkvision: 60
+    },
+    {
+        name: "Half-Elf",
+        move: 30,
+        darkvision: 30
+    },
+    {
+        name: "Half-Orc",
+        move: 30,
+        darkvision: 30
+    },
+    {
+        name: "Halfling",
+        move: 25,
+        darkvision: 0
+    },
+    {
+        name: "Human",
+        move: 30,
+        darkvision: 0
+    },
+    {
+        name: "Tiefling",
+        move: 30,
+        darkvision: 60
+    }
+];
+
+const classes = [
+    {
+        name: "Fighter",
+        hitDice: 10,
+        spells: false
+    },
+    {
+        name: "Ranger",
+        hitDice: 8,
+        spells: false
+    },
+    {
+        name: "Barbarian",
+        hitDice: 12,
+        spells: false
+    },
+    {
+        name: "Paladin",
+        hitDice: 8,
+        spells: true
+    },
+    {
+        name: "Cleric",
+        hitDice: 8,
+        spells: true
+    },
+    {
+        name: "Rogue",
+        hitDice: 6,
+        spells: false
+    },
+    {
+        name: "Druid",
+        hitDice: 12,
+        spells: true
+    },
+    {
+        name: "Monk",
+        hitDice: 8,
+        spells: false
+    },
+    {
+        name: "Wizard",
+        hitDice: 6,
+        spells: true
+    },
+    {
+        name: "Bard",
+        hitDice: 8,
+        spells: true
+    }
+];
+
 //Functions to handle each of the clickable fields in the character creation
 //Edit name
 editName = () => {
@@ -227,24 +341,48 @@ editName = () => {
 
 }
 
-//Edit level
-editLevel = () => {
-    console.log("Editing level...");
-}
-
 //Edit race
 editRace = () => {
     console.log("Editing race...");
+    charRace.remove();
+    let raceSelect = document.createElement("select");
+
+    //Loop through the list of races and populate the options
+    for (let i = 0; i < races.length; i++) {
+        let option = document.createElement("option");
+        option.innerText = races[i].name;
+        raceSelect.appendChild(option);
+    };
+
+    //Format and append raceSelect
+    raceSelect.classList.add("form-control");
+    raceDiv.appendChild(raceSelect);
+
+    //Add the listener for a blur event or submit event to:
+    //1. change the character's race to raceSelect.value
+    //2. remove raceSelect and replace with a new, formatted charRace
 }
 
 //Edit class
 editClass = () => {
     console.log("Editing class...");
-}
+    charClass.remove();
+    let classSelect = document.createElement("select");
 
-//Edit image
-editImage = () => {
-    console.log("Editing image...");
+    //Loop through the list of races and populate the options
+    for (let i = 0; i < classes.length; i++) {
+        let option = document.createElement("option");
+        option.innerText = classes[i].name;
+        classSelect.appendChild(option);
+    };
+
+    //Format and append raceSelect
+    classSelect.classList.add("p-1", "form-control");
+    classDiv.appendChild(classSelect);
+
+    //Add the listener for a blur event or submit event to:
+    //1. change the character's class to classSelect.value
+    //2. remove classSelect and replace with a new, formatted charClass
 }
 
 //Edit attribute
@@ -316,8 +454,11 @@ document.addEventListener("click", (event)=> {
     if (target.getAttribute("id") === "characterName") {
         editName();
     }
-    else if (target.getAttribute("id") === "characterLevel") {
-        editLevel();
+    else if (target.getAttribute("id") === "characterRace") {
+        editRace();
+    }
+    else if (target.getAttribute("id") === "characterClass") {
+        editClass();
     }
     else if (target.getAttribute("id") === "doneButton") {
         finishEdits();
