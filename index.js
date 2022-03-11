@@ -24,13 +24,15 @@ character.level = 5;
 character.xp = 327;
 character.attributes[0].score = 16;
 
+console.log(character);
+
 logCharacter(character);
 
 
 //Write the file to a character HTML page output (for now, a test page)
 const writeFile = fileContent => {
     return new Promise((resolve, reject) => {
-        fs.writeFile("./public/character-test.html", fileContent, err => {
+        fs.writeFile("./public/index.html", fileContent, err => {
             if (err) {
                 reject (err);
                 return;
