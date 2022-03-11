@@ -17,17 +17,6 @@ const {
 
 
 let character = new Character();
-//Assign any values we want to the new character
-character.name = "Durin";
-character.race = "Dwarf";
-character.level = 5;
-character.xp = 327;
-character.attributes[0].score = 16;
-
-console.log(character);
-
-logCharacter(character);
-
 
 //Write the file to a character HTML page output (for now, a test page)
 const writeFile = fileContent => {

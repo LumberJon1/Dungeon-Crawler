@@ -13,9 +13,15 @@ const displayName = (character) => {
 const displayClass = (character) => {
     let {level, race, characterClass} = character;
     return `
-    <h3 id="characterLevel" class="bg-primary text-center col-sm-4">Level: ${level}</h3>
-    <h3 id="characterRace" class="bg-primary text-center col-sm-4">Race: ${race}</h3>
-    <h3 id="characterClass" class="bg-primary text-center col-sm-4">Class: ${characterClass}</h3>
+    <div id="characterLevelDiv" class="bg-primary text-center col-sm-4">
+        <h3 id="characterLevel">Level: ${level}</h3>
+    </div>
+    <div id="characterRaceDiv" class="bg-primary text-center col-sm-4">
+        <h3 id="characterRace">Race: ${race}</h3>
+    </div>
+    <div id="characterClassDiv" class="bg-primary text-center col-sm-4">
+        <h3 id="characterClass">Class: ${characterClass}</h3>
+    </div>
     `;
 }
 
@@ -35,7 +41,7 @@ const displayAttributes = (character, attributesArray) => {
     return `
     ${attributesArray.map(function({name, score}) {
         return `
-        <div class="d-flex align-items-center justify-content-center p-2 w-100 h-100">
+        <div class="characterAttributeDiv d-flex align-items-center justify-content-center p-2 w-100 h-100">
             <h4 class="characterAttribute">${name}: ${score}</h4>
         </div>
         <p class="characterAttributeBonus">Bonus: ${character.getBonus(score)}</p>
@@ -53,7 +59,7 @@ const displayImage = () => {
 const displayHP = (character) => {
     let {maxHP, currentHP} = character;
     return `
-    <div class="p-3">
+    <div id="hpDiv" class="p-3">
         <span>HP: </span><span id="characterHPCurrent">${currentHP}</span><span>/</span><span id="characterHPMax">${maxHP}</span>
     </div>
     `
@@ -62,7 +68,7 @@ const displayHP = (character) => {
 //Displays the character's AC to the page
 const displayAC = (character) => {
     return `
-    <div class="p-3">
+    <div id="acDiv" class="p-3">
         <span>Armor Class: </span><span id="characterAC">${character.ac}</span>
     </div>
     `
@@ -73,7 +79,7 @@ const displaySkills = (skillsArray) => {
     return skillsArray.map(function({name, Proficient}) {
 
         return `
-        <div class="d-flex text-center justify-content-between p-2 w-100">
+        <div class="skillsDiv d-flex text-center justify-content-between p-2 w-100">
             <p class="w-50 characterSkill">${name}</p>
             <p class="w-50 characterSkillProficiency">${Proficient}</p>
         </div>
@@ -110,10 +116,12 @@ const loadPage = (character) => {
             <button id="doneButton" class="btn btn-success text-light">Done</button>
         </div>
         <h1 class="col-12 text-center p-2 bg-primary">Character Sheet</h1>
-        <h2 id="characterName" class="col-12 p-2 text-center bg-light">${displayName(character)}</h2>
+        <div id="characterNameDiv" class="d-flex justify-content-center align-items-center col-12">
+            <h2 id="characterName" class="col-12 p-2 text-center bg-light">${displayName(character)}</h2>
+        </div>
     </header>
     <main class="row">
-        <div id="description-div" class="d-flex flex-column flex-sm-row align-items-center justify-content-center col-12">
+        <div id="description-div" class="d-flex flex-column my-2 flex-sm-row align-items-center justify-content-center col-12">
             ${displayClass(character)}
         </div>
         ${displayXP(character)}

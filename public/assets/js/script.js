@@ -16,6 +16,16 @@ const charAC = document.querySelector("#characterAC");
 const charSkills = document.getElementsByClassName("characterSkill");
 const charSkillProficiency = document.getElementsByClassName("characterSkillProficiency");
 
+//Document parent div selectors
+const nameDiv = document.querySelector("#characterNameDiv");
+const levelDiv = document.querySelector("#characterLevelDiv");
+const raceDiv = document.querySelector("#characterRaceDiv");
+const classDiv = document.querySelector("#characterClassDiv");
+const xpDiv = document.querySelector("#xp-section-div");
+const imgDiv = document.querySelector("#characterNameDiv");
+const hpDiv = document.querySelector("#hpDiv");
+const acDiv = document.querySelector("#acDiv");
+
 //Below is a repeat of the content in Character.js but I can't import it.  Would love to modularize once
 //I figure out how.
 class Character {
@@ -199,14 +209,22 @@ class Character {
         }
     }
 }
-  
-//Test console log
-console.log("Script linked correctly.");
 
 //Functions to handle each of the clickable fields in the character creation
 //Edit name
 editName = () => {
     console.log("Editing name...");
+    charName.remove();
+    let nameTextField = document.createElement("input");
+    nameTextField.setAttribute("id", "nameText");
+    nameTextField.setAttribute("placeholder", "Enter Name Here");
+    nameTextField.classList.add("form-control", "col-8", "p-2", "m-2", "text-center");
+    nameDiv.appendChild(nameTextField);
+
+    //Add the listener for a blur event or submit event to:
+    //1. change the character's name to nameTextField.value
+    //2. remove nameTextField and replace with a new charName
+
 }
 
 //Edit level
